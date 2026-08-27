@@ -3,216 +3,228 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>💄 حنين الشامخة</title>
+<title>💄 صالون التجميل</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   body {
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    background: linear-gradient(deg, #ffd6ec, #ffe9f4, #fff0f8);
-    min-height: 100;
-    display: flex; flex-direction: column; align-items: center;
-    overflow-x: hidden;
+    font-family:'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(180deg,#ffd6ec,#ffeef6,#fff7fb);
+    min-height:100vh;
+    display:flex; flex-direction:column; align-items:center;
   }
-  h1 {
- margin: px 0 2px; color: #d63384; font-size: 26px;
-    text-shadow: 1px 1px 0 #fff;
-  }
-  .sub { color: #a34a7d; font-size: 14px; margin-bottom: 6px; }
+  h1 { margin:10px 0 2px; color:#d63384; font-size:24px; text-shadow:1px 1px 0 #fff; }
+  .sub { color:#a34a7d; font-size:14px; margin-bottom:8px; }
   #stage {
-    position: relative; width: 320px; height: 420px;
-    background: linear-gradient(#fff, #ffe6f2);
- border-radius: 20px; box-shadow: 0 8px 24px rgba(214,51,132,.25);
-    margin-bottom: 12px; overflow: hidden;
+    position:relative; width:300px; height:400px;
+    background:linear-gradient(#fff,#ffe6f2);
+    border-radius:20px; overflow:hidden;
+    box-shadow:0 8px 24px rgba(214,51,132,.25);
+    margin-bottom:10px;
   }
-  #stage svg { width: 100%; height: 100%; }
-  .btn-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; padding: 0 px; max-width: 380px; }
+  #char { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
+  /* طبقات المكياج فوق الوجه */
+  .mk { position:absolute; border-radius:50%; pointer-events:none; opacity:.45; transition:.3s; }
+  #blushL,#blushR { width:26px; height:16px; }
+  #shadowL,#shadowR { width:20px; height:10px; border-radius:10px; opacity:.4; }
+  #lips { width:16px; height:8px; border-radius:8px; opacity:.85; }
+  #message { min-height:28px; color:#d63384; font-weight:bold; font-size:15px; text-align:center; padding:0 10px; }
+  .btn-row { display:flex; flex-wrap:wrap; gap:6px; justify-content:center; padding:0 8px; max-width:380px; }
   .tab {
-    border: none; border-radius: 20px; padding: 9px 16px; font-size: 15px;
-    background: #fff; color: #d63384; font-weight: bold; cursor: pointer;
-    box-shadow: 0 3px 8px rgba(0,0,0,.08); transition: .15s;
+    border:none; border-radius:20px; padding:8px 14px; font-size:14px;
+    background:#fff; color:#d63384; font-weight:bold; cursor:pointer;
+    box-shadow:0 3px 8px rgba(0,0,0,.08);
   }
-  .tab.active { background: #d63384; color: #fff; }
-  #colors {
-    display: flex; flex: wrap;: 10px; justify-content: center;
-    padding: 12px; max-width: 380px;
-  }
+  .tab.active { background:#d63384; color:#fff; }
+  #colors { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; padding:12px; max-width:380px; min-height:70px; }
   .swatch {
-    width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
-    border: 4px solid #fff; box-shadow: 0 3px 8px rgba(0,0,0,.2); transition: .15s;
+    width:42px; height:42px; border-radius:50%; cursor:pointer;
+    border:4px solid #fff; box-shadow:0 3px 8px rgba(0,0,0,.2);
   }
-  .swatch:active { transform: scale(1.15); }
-  .swatch.selected { border-color: #d63384; transform: scale(1.1); }
-  #message {
-    min-height: 30px; margin: 6px; color: #d63384 font-weight: bold;
-    font-size: 16px; text-align: center; padding: 0 10px;
-  }
+  .swatch.selected { border-color:#d63384; transform:scale(1.12); }
   #done {
-    display: none; position: absolute; inset: 0; z-index: 10;
-    background: rgba(255,255,255,.96);
-    flex-direction: column; align-items: center; justify-content: center;
-    text-align: center; padding: 20px; border-radius: 20px;
+    display:none; position:absolute; inset:0; z-index:10;
+    background:rgba(255,255,255,.97); border-radius:20px;
+    flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px;
   }
-  #done h2 { color: #d63384; font-size: 24px; margin-bottom: 10px; }
-  #done p { color: #7ab60; font-size: 16px; line-height: 1.8; }
-  #done button { margin-top: 16px; }
-  .sparkle { position: absolute; pointer-events: none; font-size: 20px; animation: up 1s ease-out forwards; }
-  @keyframes up { from {opacity:1; transform: translateY(0);} to {opacity:0; transform: translateY(-px);} }
+  #done h2 { color:#d63384; font-size:22px; margin-bottom:8px; }
+  #done p { color:#7a7a7a; font-size:15px; line-height:1.8; }
+  .sparkle { position:absolute; pointer-events:none; font-size:18px; animation:up 1s ease-out forwards; z-index:5; }
+  @keyframes up { from{opacity:1;transform:translateY(0)} to{opacity:0;transform:translateY(-60px)} }
 </style>
 </head>
 <body>
 
-<h1>💄 حنين الشامخة 💄</h1>
-<div class="sub">جمّلي ملاك للعرس! ✨</div>
+<h1>💄 صالون التجميل 💄</h1>
+<div class="sub">جمّليها للعرس! ✨</div>
 
 <div id="stage">
-<svg viewBox="0 0 300 400">
-  <!-- الراس -->
-  <ellipse id="faceShape" cx="150 cy="170" rx="62" ry="72" fill="#ffdbb5"/>
-  <!-- الأذنين -->
-  <circle cx="88" cy="180" r="12" fill="#ffdbb5"/>
-  <circle cx="212" cy="180" r="12" fill="#ffdbb5"/>
-  <!-- العيون البيضاء -->
-  <ellipse cx="126" cy="170" rx="14" ry="17" fill="#fff"/>
-  <ellipse cx="174" cy="170" rx="14" ry="17" fill="#fff"/>
-  <!-- قزحية العين -->
-  <circle class="iris" cx="126" cy="172" r="8" fill="#5b3a29"/>
-  <circle class="iris" cx="174" cy="172" r="8" fill="#5b3a29"/>
-  <circle cx="128" cy="169" r="2.5" fill="#fff"/>
-  <circle cx="176" cy="169" r="2.5" fill="#fff"/>
-  <!-- الرموش -->
-  <path d="M112 158126 148 140 158" stroke="#3a2a1a" stroke-width="2.5" fill="none"/>
-  <path d="M160 158 Q174 148 188 158" stroke="#3a2a1a" stroke-width="2.5" fill="none"/>
-  <!-- الشفاه -->
-  <path id="lips" d="M132 225 Q150 232 168 225 Q150 244 132 225 Z" fill="#e8a0a8"/>
-  <!-- الوجنتين -->
-  <circle id="blushL" cx="112" cy="198" r="12" fill="transparent"/>
-  <circle id="blushR" cx="188" cy="198" r="12" fill="transparent"/>
-  <!-- الشعر -->
-  <path id="hair" d="M85 175 Q80 85 150 82 Q220 85 215 175 Q220 120 150 112 Q80 120 85 175 Z" fill="#4a2c1a"/>
-  <!-- الفستان -->
-  <path id="dress" d="M115 250 L185 250 L215 380 L85 380 Z" fill="#e75480"/>
-  <rect x="115" y="240" width="70" height="18" rx="8" fill="#e75480"/>
-  <!-- العباءة -->
-  <path id="hijab" d="M82 190 Q72 70 150 68 Q228 70 218 190 Q215 110 150 105 Q85 110 82 190 Z" fill="transparent"/>
-</svg>
+  <img id="char" src="base.png" alt="الشخصية">
+  <!-- طبقات المكياج -->
+  <div id="shadowL" class="mk"></div>
+  <div id="shadowR" class="mk"></div>
+  <div id="blushL" class="mk"></div>
+  <div id="blushR" class="mk"></div>
+  <div id="lips" class="mk"></div>
 
-<div id="done">
-  <h2>🎉 ياااه! ما شاء الله! 🎉</h2>
-  <p id="doneMsg">ملك وليت آخر عالم!<br>إنتي الحلوة يا سلطانة! 👑</p>
-  <button class="tab" onclick="resetAll()">🔁 عاود تاني</button>
-</div>
+  <div id="done">
+    <h2>🎉 ما شاء الله! 🎉</h2>
+    <p>ولّت آخر عالم!<br>إنتي الحلوة يا سلطانة 👑</p>
+    <button class="tab" onclick="resetAll()">🔁 عاود تاني</button>
+  </div>
 </div>
 
 <div class="btn-row">
-  <button class="tab active" data-tab="lipstick">💋 الشفايف</button>
+  <button class="tab active" data-tab="lips">💋 الشفايف</button>
   <button class="tab" data-tab="blush">🌸 الورد</button>
-  <button class="tab" data-tab="eyeshadow">👁️ العيون</button>
- <button class="tab" data-tab="hair">💇‍♀️ الشعر</button>
+  <button class="tab" data-tab="shadow">👁️ العيون</button>
+  <button class="tab" data-tab="hair">💇‍♀️ التسريحة</button>
   <button class="tab" data-tab="dress">👗 اللبسة</button>
   <button class="tab" data-tab="hijab">🧕 الحجاب</button>
   <button class="tab" onclick="finish()">✨ خلصت!</button>
 </div>
 
 <div id="colors"></div>
-<div id="message">أهلاً حنين! اختاري لون وابدي جمّلي ملك 👇</div>
+<div id="message">أهلاً بيك! اختاري قسم وابدي التجميل 👇</div>
 
 <script>
-const LIBYAN_PHRASES = {
-  lipstick: ["دووسي شفايفك يا أمورة! 💋","كيسة حلوة يا ملك! 😘  blush: ["شوية ورد على وجناتك 🌸","يا ولّتي زينة! 🌹"],
-  eyeshadow: ["عيونك ولّت صحيحة نجمة! ⭐","لا تحركي عيونك.. برشة برشة! 👁️"],
- : ["الضفرة تضفيرة والثانية ضفريتين! 💇‍♀️","شعرك حرير يا ملك! ✨"],
-  dress: ["انزي القفطان الوردي يا سلطانة! 👗","ما شاء الله عليك! 👑"],
-  hijab: ["الحجاب زينك يا قمر! 🧕","ربي يحفظك يا غالية! 💗"]
+// ====== مواضع المكياج (عدّلها إذا المكياج ما طابقش الوجه) ======
+const POS = {
+  shadowL:{left:'40%', top:'22%'},
+  shadowR:{left:'52%', top:'22%'},
+  blushL:{left:'35%', top:'30%'},
+  blushR:{left:'56%', top:'30%'},
+  lips:{left:'46.5%', top:'37.5%'}
+};
+Object.keys(POS).forEach(id=>{
+  const el=document.getElementById(id);
+  el.style.left=POS[id].left; el.style.top=POS[id].top;
+});
+
+// ====== الأقسام ======
+const LIBYAN = {
+  lips:["دووسي شفايفك يا أمورة! 💋","كيسة حلوة! 😘"],
+  blush:["شوية ورد على وجناتك 🌸","يا ولّتي زينة! 🌹"],
+  shadow:["عيونك ولّت صحيحة نجمة! ⭐","برشة برشة شوية! 👁️"],
+  hair:["تسريحة حلوة يا ملك! 💇‍♀️","شعرك حرير! ✨"],
+  dress:["ما شاء الله عليك يا سلطانة! 👗","اللبسة دي عليك! 👑"],
+  hijab:["الحجاب زينك يا قمر! 🧕","ربي يحفظك يا غالية! 💗"]
 };
 
 const COLORS = {
-  lipstick:  ["#e8a0a8","#e75480","#d6336c","#b03052","#f4a3c0","#8b2942","#ff8fab","#a4133c"],
-  blush:     ["#ffc2d1","#ff8fab","#ff5c8a","#f7a1c4","#e56b9f","#ffb3c6"],
-  eyeshadow: ["#b76e79","#8e5b8f","#4a7c59","#3a6ea5","#c9924e","#6d4c7d","#d98ca6","#5b3a29"],
-  hair:      ["#4a2c1a","#1a1a1a","#6b3e1e","#a8642a","#c9a227","#8b5a2b","#d4a373","#5c4033"],
-  dress:     ["#e75480","#9b59b6","#2e86ab","#27ae60","#f39c12","#16a085","#d6336c","#34495e"],
-  hijab:     ["transparent","#ffffff","#ffd6ec","#c3aed6","#a3d9c9","#ffe3b3","#f4b8c1","#bde0fe"]
+  lips:["#e8a0a8","#e75480","#d6336c","#b03052","#ff8fab","#a4133c"],
+  blush:["#ffc2d1","#ff8fab","#ff5c8a","#f7a1c4"],
+  shadow:["#b76e79","#8e5b8f","#3a6ea5","#c9924e","#6d4c7d","#4a7c59"],
+  hair:[
+    {n:"ضفيرة", img:"hair-braid.png"},
+    {n:"شعر نازل", img:"hair-down.png"}
+  ],
+  dress:[
+    {n:"فوشيا", img:"dress-pink.png"},
+    {n:"أبيض ذهبي", img:"dress-white.png"},
+    {n:"أزرق ذهبي", img:"dress-gold.png"},
+    {n:"أزرق ساتان", img:"dress-blue1.png"},
+    {n:"أزرق منفوش", img:"dress-blue2.png"}
+  ],
+  hijab:[
+    {n:"وردي", img:"hijab-pink.png"},
+    {n:"بيج", img:"hijab-beige.png"},
+    {n:"أسود", img:"hijab-black.png"}
+  ]
 };
 
-const TAB_TARGETS = {
-  lipstick: ["#lips"],
-  blush: ["#blushL","#blushR"],
-  eyeshadow: [".iris"],
-  hair: ["#hair"],
-  dress: ["#dress"],
-  hijab: ["#hijab"]
-};
-
-let currentTab = "lipstick";
-let selected = { lipstick:null, blush:null, eyeshadow:null, hair:null, dress:null, hijab:null };
-
+const BASE = "base.png";
+let currentTab = "lips";
+let currentImg = BASE;
+const char = document.getElementById("char");
 const colorsDiv = document.getElementById("colors");
 const message = document.getElementById("message");
+const selected = {lips:null, blush:null, shadow:null};
 
-document.querySelectorAll(".[data-tab]").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".tab[data-tab]").forEach(b => b.classList.remove("active"));
+document.querySelectorAll(".tab[data-tab]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".tab[data-tab]").forEach(b=>b.classList.remove("active"));
     btn.classList.add("active");
     currentTab = btn.dataset.tab;
     renderColors();
   });
 });
 
-function renderColors() {
-  colorsDiv.innerHTML = "";
-  COLORS[currentTab].forEach(c => {
-    const d = document.createElement("div");
-    d.className = "swatch" + (selected[currentTab] === c ? " selected" : "");
-    d.style.background = c === "transparent" ? "repeating-conic-gradient(#ccc 0 25%, #fff 0 50%) 0 0/12px 12px" : c;
-    d.addEventListener("click", () => applyColor(c));
+function renderColors(){
+  colorsDiv.innerHTML="";
+  COLORS[currentTab].forEach(item=>{
+    const isColorTab = ["lips","blush","shadow"].includes(currentTab);
+    const d=document.createElement("div");
+
+    if(isColorTab){
+      d.className="swatch"+(selected[currentTab]===item?" selected":"");
+      d.style.background=item;
+      d.addEventListener("click",()=>applyMakeup(item));
+    } else {
+      d.className="swatch";
+      d.style.background="#fff";
+      d.style.display="flex"; d.style.alignItems="center"; d.style.justifyContent="center";
+      d.style.fontSize="12px"; d.style.fontWeight="bold"; d.style.color="#d63384";
+      d.textContent=item.n;
+      d.addEventListener("click",()=>switchImage(item.img));
+    }
     colorsDiv.appendChild(d);
   });
 }
 
-function applyColor(c) {
-  selected[currentTab] = c;
-  TAB_TARGETS[currentTab].forEach(sel => {
-    document.querySelectorAll(sel).forEach(el => el.setAttribute("fill", c));
+function applyMakeup(color){
+  selected[currentTab]=color;
+  const map={lips:"#lips",blush:"#blushL,#blushR",shadow:"#shadowL,#shadowR"};
+  document.querySelectorAll(map[currentTab]).forEach(el=>{
+    el.style.background=color;
+    el.style.display="block";
   });
-  const phrases = LIBYAN_PHRASES[currentTab];
-  message.textContent = phrases[Math(Math.random() * phrases.length)];
-  sparkle();
+  say();
   renderColors();
+  sparkle();
 }
 
-function sparkle() {
-  const stage = document.getElementById("stage");
-  for (let i = 0; i < 5; i++) {
-    const s = document.createElement("div");
-    s.className = "sparkle";
-    s.textContent = ["✨","💖","🌸","⭐"][Math.floor(Math.random()*4)];
-    s.style.left = (60 + Math.random()*200) + "px";
-    s.style.top = (100 + Math.random()*200) + "px";
+function switchImage(img){
+  currentImg=img;
+  char.src=img;
+  say();
+  sparkle();
+}
+
+function say(){
+  const p=LIBYAN[currentTab];
+  message.textContent=p[Math.floor(Math.random()*p.length)];
+}
+
+function sparkle(){
+  const stage=document.getElementById("stage");
+  for(let i=0;i<5;i++){
+    const s=document.createElement("div");
+    s.className="sparkle";
+    s.textContent=["✨","💖","🌸","⭐"][Math.floor(Math.random()*4)];
+    s.style.left=(50+Math.random()*200)+"px";
+    s.style.top=(50+Math.random()*200)+"px";
     stage.appendChild(s);
-    setTimeout(() => s.remove(), 1000);
+    setTimeout(()=>s.remove(),1000);
   }
 }
 
-function finish() {
-  if (!selected.lipstick && !selected.dress) {
-    message.textContent = "لسه ما جمّليتيهاش! جربي شوية ألوان أول 💄";
+function finish(){
+  if(!selected.lips && currentImg===BASE){
+    message.textContent="لسه ما جمّلتيهاش! جرّبي شوية أول 💄";
     return;
   }
-  document.getElementById("done").style.display = "flex";
+  document.getElementById("done").style.display="flex";
   sparkle();
 }
 
-function resetAll() {
-  selected = { lipstick:null, blush:null, eyeshadow:null, hair:null, dress:null, hijab:null };
-  document.getElementById("lips").setAttribute("fill","#e8a0a8");
-  document.getElementById("blushL").setAttribute("fill","transparent");
-  document.getElementById("blushR").setAttribute("fill","transparent");
-  document.querySelectorAll(".iris").forEach(e=>e.setAttribute("fill","#5b3a29"));
-  document.getElementById("hair").setAttribute("fill","#4a2c1a");
-  document.getElementById("dress").setAttribute("fill","#e75480");
-  document.getElementById("hijab").setAttribute("fill","transparent");
-  document.getElementById("done").style.display = "none";
-  message.textContent = "عوّدي من جديد! جمّليها تاني 💄";
+function resetAll(){
+  selected.lips=null; selected.blush=null; selected.shadow=null;
+  ["#lips","#blushL","#blushR","#shadowL","#shadowR"].forEach(s=>{
+    document.querySelectorAll(s).forEach(el=>{el.style.background="transparent";});
+  });
+  currentImg=BASE; char.src=BASE;
+  document.getElementById("done").style.display="none";
+  message.textContent="عوّدي من جديد! جمّليها تاني 💄";
   renderColors();
 }
 
